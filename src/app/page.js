@@ -31,15 +31,17 @@ export default function Home() {
   return (
     <div className="main">
       <div className="container">
-        <img
-          src={loading ? "../../gordonPreparing.png" : "../../gordon.png"}
+        <Image
+          src={loading ? "/../../gordonPreparing.png" : "/../../gordon.png"}
           alt="GordonRamsay"
+          width={280}
+          height={300}
           className="gordon"
         />
         {!result && !loading && (
           <div className="inputContainer">
             <p className="paragraph">
-              Show me your top-notch favorite dish, come on!
+              {`Show me your top-notch favorite dish, come on!`}
             </p>
 
             <input
@@ -52,7 +54,7 @@ export default function Home() {
                 classify(e.target.value);
               }}
             />
-            <p className="paragraph">or insert directly</p>
+            <p className="paragraph">{`or insert directly`}</p>
             <input
               type="file"
               className="inputPhoto"
@@ -64,7 +66,7 @@ export default function Home() {
         )}
       </div>
       {loading && (
-        <p className="paragraph">Let's see what you gave me, mate.</p>
+        <p className="paragraph">{`Let's see what you gave me, mate.`}</p>
       )}
       {result && !loading && (
         <div className="container chat">
