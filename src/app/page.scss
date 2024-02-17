@@ -1,0 +1,53 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .button {
+      border: 3px solid #e5dc0d;
+      padding: 20px;
+      border-radius: 20px;
+      width: 200px;
+    }
+
+    .gordon {
+      max-width: 250px;
+      border-bottom-right-radius: 50% 50%;
+      border-bottom-left-radius: 50% 50%;
+    }
+
+    .inputContainer {
+      margin-top: 20px;
+    }
+
+    .inputPhoto {
+      background-color: #f0eeef;
+      width: 200px;
+      max-width: 200px;
+      padding: 10px;
+      border-radius: 20px;
+      border: 0px;
+    }
+
+    .paragraph {
+      max-width: 300px;
+    }
+  }
+  .chat {
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #f0eeef;
+  }
+  .paragraph {
+    margin-top: 20px;
+  }
+}
