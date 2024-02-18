@@ -7,4 +7,4 @@ export const bodyNotConfident = (props) =>
   `Now, let's take a moment here – what I'm trying to figure out in this culinary puzzle is ${props.imageGiven}, I suppose? I'm somewhat hovering around ${props.certainty}%, and I must admit, it's a bit challenging to pinpoint exactly what you've presented on this plate. A curious creation of ${props.name}, perhaps?`;
 //------------------------------
 export const notFood = (props) =>
-  `What on earth is this? You've sent me... ${props.name}! Are you trying to test my patience? This is absolutely ludicrous! Get it together and show me a proper image of some food, pronto!`;
+  `What on earth is this? You've sent me... ${props.imageGiven}! Are you trying to test my patience? This is absolutely ludicrous! Get it together and show me a proper image of some food, pronto!`;
