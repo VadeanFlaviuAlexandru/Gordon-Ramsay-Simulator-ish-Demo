@@ -9,6 +9,7 @@ import {
   introConfident,
   introNotConfident,
   notFood,
+  nothing,
 } from "./utilities/responses";
 
 export default function Home() {
@@ -35,9 +36,9 @@ export default function Home() {
     const json = await result.json();
     setResult(json);
     setLoading(false);
+    console.log(json, json.name == "no");
   };
 
-  console.log(result);
   return (
     <div className="main">
       <div className="container">
@@ -79,11 +80,11 @@ export default function Home() {
       {result && !loading && (
         <div className="container chat">
           <p className="paragraph">
-            {parseFloat(result.certainty) > 70
+            {result.name == "no"
+              ? ""
+              : parseFloat(result.certainty) > 70
               ? introConfident
-              : parseFloat(result.certainty) > 37
-              ? introNotConfident
-              : ""}
+              : parseFloat(result.certainty) > 37 && introNotConfident}
           </p>
           {parseFloat(result.certainty) > 37 && (
             <Image
@@ -98,7 +99,9 @@ export default function Home() {
             />
           )}
           <p className="paragraph">
-            {parseFloat(result.certainty) > 70
+            {result.name == "no"
+              ? notFood({ imageGiven: result.imageGiven })
+              : parseFloat(result.certainty) > 70
               ? bodyConfident({
                   imageGiven: result.imageGiven,
                   certainty: result.certainty,
@@ -110,7 +113,7 @@ export default function Home() {
                   certainty: result.certainty,
                   name: result.name,
                 })
-              : notFood({ imageGiven: result.imageGiven })}
+              : nothing}
           </p>
           <button
             className="button"

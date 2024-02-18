@@ -8,3 +8,6 @@ export const bodyNotConfident = (props) =>
 //------------------------------
 export const notFood = (props) =>
   `What on earth is this? You've sent me... ${props.imageGiven}! Are you trying to test my patience? This is absolutely ludicrous! Get it together and show me a proper image of some food, pronto!`;
+//------------------------------
+export const nothing =
+  "Fantastic, you've brought me all the way here to show me... absolutely nothing. I must say, your favorite dish is truly invisible. Save the disappearing acts for the magicians, will you?";
