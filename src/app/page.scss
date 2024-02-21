@@ -11,13 +11,6 @@
     justify-content: center;
     text-align: center;
 
-    .button {
-      border: 3px solid #e5dc0d;
-      padding: 20px;
-      border-radius: 20px;
-      width: 200px;
-    }
-
     .gordon {
       max-width: 250px;
       border-bottom-right-radius: 50% 50%;
@@ -36,10 +29,6 @@
       border-radius: 20px;
       border: 0px;
     }
-
-    .paragraph {
-      max-width: 300px;
-    }
   }
   .chat {
     margin-top: 20px;
@@ -48,6 +37,16 @@
     background-color: #f0eeef;
   }
   .paragraph {
+    align-self: center;
+    max-width: 300px;
     margin-top: 20px;
+  }
+
+  .button {
+    border: 3px solid #e5dc0d;
+    padding: 15px 20px 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    width: 200px;
   }
 }
