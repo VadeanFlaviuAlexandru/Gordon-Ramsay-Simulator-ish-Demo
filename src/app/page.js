@@ -149,7 +149,7 @@ export default function Home() {
       </div>
       <div>
         {loading && !recipe && (
-          <p className="paragraph">Let's see what you gave me, mate...</p>
+          <p className="paragraph">{`Let's see what you gave me, mate...`}</p>
         )}
         {result && !loading && (
           <div className="container chat">
@@ -197,7 +197,7 @@ export default function Home() {
                   askRecipe(result.name);
                 }}
               >
-                I don't know the recipe, chef!
+                {`I don't know the recipe, chef!`}
               </button>
             )}
           </div>
