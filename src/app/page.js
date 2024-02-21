@@ -80,9 +80,10 @@ export default function Home() {
       })
       .then((responseRecipe) => {
         setRecipe(responseRecipe.recipe);
-        setImageUrl(null);
+        setImageUrl("");
         setResult(null);
         setLoading(true);
+        console.log(imageUrl, loading, recipe, error);
       })
       .catch((error) => {
         console.error("Error while fetching recipe:", error);
@@ -97,7 +98,7 @@ export default function Home() {
         setResult(null);
         setImageUrl("");
         setLoading(false);
-        setRecipe(null);
+        setRecipe("");
       }}
     >
       Yes, chef!
@@ -190,7 +191,7 @@ export default function Home() {
                 : nothing}
             </p>
             {yesButton}
-            {!recipe && result.name !== "no" && (
+            {/* {!recipe && result.name !== "no" && (
               <button
                 className="button"
                 onClick={() => {
@@ -199,7 +200,7 @@ export default function Home() {
               >
                 {`I don't know the recipe, chef!`}
               </button>
-            )}
+            )} */}
           </div>
         )}
       </div>
