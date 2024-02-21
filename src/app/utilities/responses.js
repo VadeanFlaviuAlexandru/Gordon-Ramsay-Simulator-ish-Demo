@@ -14,4 +14,4 @@ export const nothing =
   "Fantastic, you've brought me all the way here to show me... absolutely nothing. I must say, your favorite dish is truly invisible. Save the disappearing acts for the magicians, will you?";
 //------------------------------
 export const recipeWithIngredients = (props) =>
-  `Seriously? It's like you're asking me to teach you how to tie your shoelaces! It's ${props.name}${props.ingredients} – it's as basic as it gets.`;
+  `Seriously? It's like you're asking me to teach you how to tie your shoelaces. It's ${props.name}!${props.ingredients} – it's as basic as it gets.`;

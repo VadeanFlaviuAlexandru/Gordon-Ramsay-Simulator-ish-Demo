@@ -190,7 +190,7 @@ export default function Home() {
                 : nothing}
             </p>
             {yesButton}
-            {!recipe && !result.name == "no" && (
+            {!recipe && result.name !== "no" && (
               <button
                 className="button"
                 onClick={() => {
