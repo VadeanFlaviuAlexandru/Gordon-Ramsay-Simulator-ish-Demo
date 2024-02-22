@@ -223,11 +223,11 @@ export default function Home() {
           </div>
         )}
       </div>
-      <div className="container chat">
-        {outOfTokens && (
+      {outOfTokens && (
+        <div className="container chat">
           <p className="paragraph">{`Look, I've tasted the good, the bad, and the ugly in your kitchen. I've dished out my fair share of critiques, and I'm officially cooked. Whether you keep cooking or hang up your apron, it's your call. I'm taking a break from the food rodeo. Best of luck.`}</p>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
