@@ -19,6 +19,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [recipe, setRecipe] = useState("");
   const [error, setError] = useState(false);
+  const [outOfTokens, setOutOfTokens] = useState(false);
 
   const identify = (imageUrl) => {
     if (!imageUrl) {
@@ -57,6 +58,7 @@ export default function Home() {
         console.error("Error during image processing:", error);
         setLoading(false);
         setError(true);
+        setOutOfTokens(true);
       });
   };
 
@@ -88,6 +90,7 @@ export default function Home() {
       .catch((error) => {
         console.error("Error while fetching recipe:", error);
         setError(true);
+        setOutOfTokens(true);
       });
   };
 
@@ -119,7 +122,7 @@ export default function Home() {
           alt="GordonRamsay"
           className="gordon"
         />
-        {!result && !recipe && !loading && (
+        {!result && !outOfTokens && !recipe && !loading && (
           <div className="inputContainer">
             <p className="paragraph">
               {`Show me your top-notch favorite dish, come on!`}
@@ -149,19 +152,19 @@ export default function Home() {
         )}
       </div>
       <div>
-        {loading && !recipe && (
+        {loading && !outOfTokens && !recipe && (
           <p className="paragraph">{`Let's see what you gave me, mate...`}</p>
         )}
-        {result && !loading && (
+        {result && !outOfTokens && !loading && (
           <div className="container chat">
             <p className="paragraph">
               {result.name == "no"
                 ? ""
                 : parseFloat(result.certainty) > 70
                 ? introConfident
-                : parseFloat(result.certainty) > 37 && introNotConfident}
+                : parseFloat(result.certainty) > 20 && introNotConfident}
             </p>
-            {parseFloat(result.certainty) > 37 && (
+            {parseFloat(result.certainty) > 20 && (
               <Image
                 src={
                   typeof imageUrl == "string"
@@ -182,16 +185,19 @@ export default function Home() {
                     certainty: result.certainty,
                     name: result.name,
                   })
-                : parseFloat(result.certainty) > 37 && result.name !== "no"
+                : parseFloat(result.certainty) > 20 && result.name !== "no"
                 ? bodyNotConfident({
                     imageGiven: result.imageGiven,
                     certainty: result.certainty,
-                    name: result.name,
+                    name:
+                      result.name === "yes"
+                        ? "We can do better than that!"
+                        : `Perhaps ${result.name}?`,
                   })
                 : nothing}
             </p>
             {yesButton}
-            {/* {!recipe && result.name !== "no" && (
+            {!recipe && result.name !== "no" && result.name !== "yes" && (
               <button
                 className="button"
                 onClick={() => {
@@ -200,12 +206,12 @@ export default function Home() {
               >
                 {`I don't know the recipe, chef!`}
               </button>
-            )} */}
+            )}
           </div>
         )}
       </div>
       <div>
-        {recipe && !error && (
+        {recipe && !outOfTokens && !error && (
           <div className="container chat">
             <p className="paragraph">
               {recipeWithIngredients({
@@ -215,6 +221,11 @@ export default function Home() {
             </p>
             {yesButton}
           </div>
+        )}
+      </div>
+      <div className="container chat">
+        {outOfTokens && (
+          <p className="paragraph">{`Look, I've tasted the good, the bad, and the ugly in your kitchen. I've dished out my fair share of critiques, and I'm officially cooked. Whether you keep cooking or hang up your apron, it's your call. I'm taking a break from the food rodeo. Best of luck.`}</p>
         )}
       </div>
     </div>
