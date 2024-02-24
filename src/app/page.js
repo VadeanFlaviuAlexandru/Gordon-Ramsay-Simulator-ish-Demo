@@ -18,11 +18,27 @@ export default function Home() {
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [recipe, setRecipe] = useState("");
-  const [error, setError] = useState(false);
   const [outOfTokens, setOutOfTokens] = useState(false);
 
   const identify = (imageUrl) => {
     if (!imageUrl) {
+      return;
+    }
+
+    const imageExtensions = [".jpg", ".jpeg", ".png", ".bmp"];
+    let isImage;
+    if (typeof imageUrl == "object") {
+      isImage = imageExtensions.some((ext) => imageUrl.name.endsWith(ext));
+    } else {
+      isImage =
+        imageExtensions.some((ext) => imageUrl.toLowerCase().endsWith(ext)) ||
+        imageUrl.toLowerCase().startsWith("data:image");
+    }
+
+    if (!isImage) {
+      if (typeof imageUrl == "object") {
+        setImageUrl("");
+      }
       return;
     }
 
@@ -43,7 +59,13 @@ export default function Home() {
             method: "GET",
           });
 
-    fetchPromise
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => {
+        reject(new Error("Request timed out"));
+      }, 5000);
+    });
+
+    Promise.race([fetchPromise, timeoutPromise])
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to process image");
@@ -55,9 +77,8 @@ export default function Home() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error during image processing:", error);
         setLoading(false);
-        setError(true);
+        setImageUrl("");
         setOutOfTokens(true);
       });
   };
@@ -85,11 +106,8 @@ export default function Home() {
         setImageUrl("");
         setResult(null);
         setLoading(true);
-        console.log(imageUrl, loading, recipe, error);
       })
       .catch((error) => {
-        console.error("Error while fetching recipe:", error);
-        setError(true);
         setOutOfTokens(true);
       });
   };
@@ -196,22 +214,24 @@ export default function Home() {
                   })
                 : nothing}
             </p>
-            {yesButton}
-            {!recipe && result.name !== "no" && result.name !== "yes" && (
-              <button
-                className="button"
-                onClick={() => {
-                  askRecipe(result.name);
-                }}
-              >
-                {`I don't know the recipe, chef!`}
-              </button>
-            )}
+            <div className="containerButton">
+              {yesButton}
+              {!recipe && result.name !== "no" && result.name !== "yes" && (
+                <button
+                  className="button"
+                  onClick={() => {
+                    askRecipe(result.name);
+                  }}
+                >
+                  {`I don't know the recipe, chef!`}
+                </button>
+              )}
+            </div>
           </div>
         )}
       </div>
       <div>
-        {recipe && !outOfTokens && !error && (
+        {recipe && !outOfTokens && (
           <div className="container chat">
             <p className="paragraph">
               {recipeWithIngredients({
