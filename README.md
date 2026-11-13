@@ -14,7 +14,6 @@
 
 ## Key Features
 
-* <a href="https://gordon-ramsay-sim-demo.netlify.app/">Hosted on netlify</a>
 * You can paste the link of a file image (or upload) a food item, then chef Gordon Ramsay will analyze it. The analyzation of the item is done using the '<a href="https://huggingface.co/nlpconnect/vit-gpt2-image-captioning">nlpconnect/vit-gpt2-image-captioning</a>' model, after which we use '<a href="https://huggingface.co/dandelin/vilt-b32-finetuned-vqa">dandelin/vilt-b32-finetuned-vqa</a>' to ask a simple question: "Is this food, yes or no? if yes, what food is in this image?".
 * After receiving a positive answer, you can ask for the recipe which is done with '<a href="https://huggingface.co/auhide/chef-gpt-en">auhide/chef-gpt-en</a>'
 * I used Next.js and it's support for API routes
